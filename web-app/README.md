@@ -1,9 +1,10 @@
 # YouVersion Circle — web app (React + Vite + TypeScript)
 
-The runnable, editable production frontend for the **YouVersion Circle**
-group Scripture experience. Talks only to the FastAPI backend; no API keys
-live in the client. Runs fully offline in **mock mode** when no backend is
-reachable, so demos/CI never break.
+The production frontend for the **YouVersion Circle** group Scripture experience.
+Talks only to the FastAPI backend; no API keys live in the client.
+
+When the backend is not reachable, the app falls back to an in-browser **mock
+engine** with deterministic passages and simulated peers — no credentials needed.
 
 ## Stack
 
@@ -34,24 +35,42 @@ web-app/
 └─ .env.example                    # frontend env (no secrets)
 ```
 
-## Local development
+## Running (mock mode — no backend needed)
 
 ```bash
-# 1) Start the backend (repo root)
-cd ../backend && python3 -m pip install -r requirements.txt
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`. If nothing is running on port 8099, the app detects
+that the backend is unreachable and uses the mock engine automatically.
+
+> **Gotcha:** If something is already listening on port 8099 (e.g. a stale backend
+> process from a previous session), the app will try to use it as a live backend.
+> If that process has outdated routes you'll get 404 errors. Fix by killing port
+> 8099 first: `lsof -ti:8099 | xargs kill -9`
+
+To **force** mock mode regardless of backend availability:
+
+```bash
+VITE_START_MOCK=1 npm run dev
+```
+
+## Running (live mode — backend required)
+
+```bash
+# 1) Start the backend (from repo root)
+cd ../backend
+source .venv/bin/activate
 python3 -m uvicorn app.main:app --host 127.0.0.1 --port 8099
 
 # 2) Start the frontend (this folder)
-cp .env.example .env         # optional; defaults are fine
 npm install
-npm run dev                  # http://localhost:5173
+npm run dev    # http://localhost:5173
 ```
 
-The dev server proxies `/api` → `http://127.0.0.1:8099` (see `vite.config.ts`
-and `VITE_PROXY_TARGET`), so the browser only ever calls the app's own origin.
-If the backend is down, the app automatically falls back to mock mode.
-
-Set `VITE_START_MOCK=1` to force offline mock mode.
+The Vite dev server proxies `/api` to `http://127.0.0.1:8099` (see
+`vite.config.ts`), so the browser only ever calls its own origin.
 
 ## Build / preview / deploy
 
@@ -73,11 +92,12 @@ npm run test       # vitest: mock API parity + highlighter interactions
 
 ## Modes
 
-- **Live vs Mock**: "Use live backend" health-checks the base URL and switches;
-  "Use mock" returns to offline mode. Startup auto-detects.
+- **Live vs Mock**: On startup the app health-checks the backend. If reachable,
+  it uses live mode; otherwise mock mode. Users can also toggle manually in the
+  UI via "Use live backend" / "Use mock" buttons.
 - **Demo vs Product**: Demo shows AI reasoning, the recommendation plan (signal
   weighting + workflow + safeguards), and API callouts. Product hides internal
-  reasoning and the tomorrow preview — the intended end-user experience.
+  reasoning — the intended end-user experience.
 
 ## Notes
 
@@ -85,5 +105,3 @@ npm run test       # vitest: mock API parity + highlighter interactions
   never generated in the client.
 - Group Pulse is **named**, not anonymous: it shows the group name and each mock
   member's response.
-- The legacy single-file demo at `../web/index.html` is kept as a zero-setup
-  backup; this app is the canonical deliverable.
