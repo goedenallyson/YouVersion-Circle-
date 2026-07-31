@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/live.ts","./src/api/mock.ts","./src/api/types.ts","./src/components/grouppulseview.tsx","./src/components/passagehighlighter.tsx","./src/components/recommendationplanview.tsx"],"version":"5.9.3"}
