@@ -8,9 +8,9 @@ Users receive a daily passage, engage via a highlight and daily prompt, unlock t
 
 ```
 scripture-frontiers/
-├── web-app/        # Vite + React frontend (localhost:5173)
+├── web-app/        # Vite + React frontend (dev server on port 5173)
 ├── shared/         # Shared TypeScript types, mock engine, engagement logic
-├── backend/        # FastAPI backend (localhost:8099)
+├── backend/        # FastAPI backend (dev server on port 8099)
 │   └── app/
 │       ├── api/        # HTTP routes
 │       ├── core/       # Config + dependency injection
@@ -30,7 +30,7 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173** in your browser (Vite will use the next available port if 5173 is taken — check the terminal output).
+Open `http://localhost:5173` in your browser (Vite will use the next available port if 5173 is taken — check the terminal output).
 
 This gives you the complete demo flow with deterministic scripture passages, simulated peer responses, and AI synthesis — all running client-side. However, to pull real scripture content from YouVersion and generate live AI synthesis via Gloo, you must set up the backend with your own credentials (see below).
 
@@ -72,6 +72,7 @@ python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8099
 
 Verify: `curl http://127.0.0.1:8099/api/v1/health` should return `{"status":"ok","gloo_configured":true,"bible_provider":"youversion",...}`
 
+
 ### 2. Web App
 
 ```bash
@@ -80,7 +81,7 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173** in your browser.
+Open `http://localhost:5173` in your browser.
 
 The Vite dev server proxies `/api` requests to the backend at `http://127.0.0.1:8099`. On startup, the app checks if the backend is reachable — if so, it uses the live API; otherwise it falls back to the mock engine.
 
