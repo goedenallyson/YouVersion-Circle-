@@ -1,7 +1,7 @@
-# Lumen — production web app (React + Vite + TypeScript)
+# YouVersion Circle — web app (React + Vite + TypeScript)
 
-The runnable, editable production frontend for the **Scripture in New Frontiers**
-group Scripture experience. Talks only to the Lumen FastAPI backend; no API keys
+The runnable, editable production frontend for the **YouVersion Circle**
+group Scripture experience. Talks only to the FastAPI backend; no API keys
 live in the client. Runs fully offline in **mock mode** when no backend is
 reachable, so demos/CI never break.
 
@@ -23,12 +23,12 @@ web-app/
 │  ├─ api/
 │  │  ├─ types.ts                  # shared response/request types (mirror backend)
 │  │  ├─ live.ts                   # live service: calls our backend only
-│  │  ├─ mock.ts                   # in-browser LumenEngine parity (offline)
+│  │  ├─ mock.ts                   # in-browser engine parity (offline)
 │  │  └─ mock.test.ts              # API-parity tests (acceptance behaviors)
 │  └─ components/
 │     ├─ PassageHighlighter.tsx    # tap + drag highlight, keyboard/ARIA
 │     ├─ PassageHighlighter.test.tsx
-│     ├─ EmojiSelector.tsx         # curated approved emoji from /lumen/config
+│     ├─ EmojiSelector.tsx         # curated approved emoji from /api/v1/lumen/config
 │     ├─ GroupPulseView.tsx        # named (non-anonymous) pulse + synthesis
 │     └─ RecommendationPlanView.tsx# Demo-mode signal weighting + safeguards
 └─ .env.example                    # frontend env (no secrets)

@@ -126,7 +126,7 @@ export interface TomorrowRecommendation {
 }
 
 // The API surface both mock and live implementations satisfy.
-export interface LumenApi {
+export interface CircleApi {
   readonly mode: "mock" | "live";
   config(groupId: string): Promise<Config>;
   members(groupId: string): Promise<{ group_id: string; members: Member[] }>;

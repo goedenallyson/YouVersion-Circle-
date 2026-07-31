@@ -4,7 +4,7 @@ import type {
   Config,
   EngagementSignal,
   GroupPulse,
-  LumenApi,
+  CircleApi,
   Member,
   SignalResponse,
   TomorrowRecommendation,
@@ -16,7 +16,7 @@ async function json<T>(r: Response): Promise<T> {
   return (await r.json()) as T;
 }
 
-export function createLiveApi(base: string): LumenApi {
+export function createLiveApi(base: string): CircleApi {
   const b = base.replace(/\/$/, "");
   const q = (g: string, d?: string) =>
     `group_id=${encodeURIComponent(g)}${d ? `&date=${encodeURIComponent(d)}` : ""}`;

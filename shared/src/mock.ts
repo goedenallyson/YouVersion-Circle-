@@ -1,4 +1,4 @@
-// Mock API: a faithful in-browser reimplementation of the backend LumenEngine.
+// Mock API: a faithful in-browser reimplementation of the backend engine.
 // Same public-domain WEB corpus, tag->theme map, deterministic (group,date)
 // selection, curated emoji, named demo peers, adaptive synthesis, 1-3 verse
 // passages, and structured recommendation plan. Lets the app run with no
@@ -8,7 +8,7 @@ import type {
   EngagementSignal,
   GroupPulse,
   GroupSynthesis,
-  LumenApi,
+  CircleApi,
   Member,
   RecommendationPlan,
   SignalResponse,
@@ -217,10 +217,10 @@ function synthesize(all: EngagementSignal[]): GroupSynthesis {
     summary = (cl[1] ? cl[1] + ". " : "") + "Today " + parts.join("; ") + ".";
     if (refs.length) summary += ` ${refs.length} member${refs.length !== 1 ? "s" : ""} shared a short reflection.`;
   }
-  return { needs, praises, themes, summary, headline: cl[1], classification: cl[0], confidence: conf, response_count: all.length, model: "lumen-fallback", provider: "fallback" };
+  return { needs, praises, themes, summary, headline: cl[1], classification: cl[0], confidence: conf, response_count: all.length, model: "circle-fallback", provider: "fallback" };
 }
 
-export function createMockApi(): LumenApi {
+export function createMockApi(): CircleApi {
   const store: Record<string, EngagementSignal[]> = {};
   const dayEntries = (g: string, d: string) => store[`${g}|${d}`] || [];
   const streak = (g: string, d: string) => {
@@ -258,7 +258,7 @@ export function createMockApi(): LumenApi {
     }));
   }
 
-  const api: LumenApi = {
+  const api: CircleApi = {
     mode: "mock",
     async config(g) {
       return { group_id: g, group_name: GROUP_NAME, approved_emoji: APPROVED_EMOJI, privacy_notice: "Responses are shared with your group and are not anonymous. Group-level insights are AI-generated." } as Config;
@@ -367,7 +367,7 @@ export function createMockApi(): LumenApi {
         safeguards_applied: ["Group-level weighting: no single member's response defines the pick.", "Repetition guard: today's passage is not recommended again.", "Scripture text comes only from YouVersion/local corpus, never AI-generated.", "AI summary is framed as insight, never quoted as Scripture.", "Negative emotion is not treated as a crisis."],
         reason,
       };
-      return { date: tmr, based_on_date: d, theme, citation: citationRange(v), text: v.text, translation: TRANSLATION, source: "local", explanation, model: "lumen-fallback", signals: sig, engagement_level: level, verse_count: v.verse_count || 1, selection_source: "recommended-for-group", selection_label: "Recommended for Your Group", recommendation_reason: reason, rejected_candidates: rejected, plan };
+      return { date: tmr, based_on_date: d, theme, citation: citationRange(v), text: v.text, translation: TRANSLATION, source: "local", explanation, model: "circle-fallback", signals: sig, engagement_level: level, verse_count: v.verse_count || 1, selection_source: "recommended-for-group", selection_label: "Recommended for Your Group", recommendation_reason: reason, rejected_candidates: rejected, plan };
     },
   };
   return api;

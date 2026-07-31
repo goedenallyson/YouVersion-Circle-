@@ -1,4 +1,4 @@
-"""HTTP routes for the Lumen Scripture demo."""
+"""HTTP routes for the YouVersion Circle Scripture demo."""
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -38,7 +38,7 @@ def health(
 
 
 # ---------------------------------------------------------------------------
-# Lumen — Verse-of-the-Day learning loop
+# YouVersion Circle — Verse-of-the-Day learning loop
 # ---------------------------------------------------------------------------
 
 
@@ -136,7 +136,7 @@ def search(
 
 
 # ---------------------------------------------------------------------------
-# Lumen — standalone synthesis (for mock-mode live AI)
+# YouVersion Circle — standalone synthesis (for mock-mode live AI)
 # ---------------------------------------------------------------------------
 
 from pydantic import BaseModel as _BM
@@ -164,6 +164,6 @@ def synthesize(
             pass
     return {
         "summary": "Consider reaching out to someone in the group today with a word of encouragement.",
-        "model": "lumen-fallback",
+        "model": "circle-fallback",
         "provider": "fallback",
     }

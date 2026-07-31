@@ -1,9 +1,9 @@
 {
-  "name": "lumen-web-app",
+  "name": "youversion-circle-web-app",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Lumen — group Scripture reflection experience (React + Vite + TS).",
+  "description": "YouVersion Circle — group Scripture reflection experience (React + Vite + TS).",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

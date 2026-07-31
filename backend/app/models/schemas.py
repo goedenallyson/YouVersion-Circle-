@@ -80,7 +80,7 @@ class MomentResponse(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Lumen — Verse-of-the-Day learning loop
+# YouVersion Circle — Verse-of-the-Day learning loop
 #
 # Loop: daily verse -> tiny engagement signal -> group pulse unlocks ->
 # Gloo AI learns themes -> tomorrow's recommendation improves.
@@ -192,7 +192,7 @@ class GroupSynthesis(BaseModel):
         description="low | medium | high — group-level weighting, not one voice.",
     )
     response_count: int = Field(default=0, ge=0)
-    model: str = Field(default="lumen-fallback", description="gloo-ai-studio | lumen-fallback")
+    model: str = Field(default="circle-fallback", description="gloo-ai-studio | circle-fallback")
     provider: str = Field(default="fallback", description="gloo | fallback")
 
 

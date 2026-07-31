@@ -1,4 +1,4 @@
-# Lumen — Scripture in New Frontiers
+# YouVersion Circle
 
 A web demo for group scripture engagement powered by YouVersion and Gloo AI.
 
@@ -16,25 +16,11 @@ scripture-frontiers/
 │       ├── core/       # Config + dependency injection
 │       ├── models/     # Pydantic schemas
 │       ├── providers/  # YouVersion, Gloo AI, local bible
-│       └── rag/        # Lumen engine (verse selection, signals, recommendations)
+│       └── rag/        # Engine (verse selection, signals, recommendations)
 └── data/           # Local scripture corpus + vector index (fallback)
 ```
 
-## Quick Start (Mock Mode — No Credentials Needed)
-
-The web app includes a full in-browser mock engine. If the backend is not running, it falls back automatically to mock data — no API keys or backend setup required. This is useful for reviewing the UI and interaction flow.
-
-```bash
-cd web-app
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173` in your browser (Vite will use the next available port if 5173 is taken — check the terminal output).
-
-This gives you the complete demo flow with deterministic scripture passages, simulated peer responses, and AI synthesis — all running client-side. However, to pull real scripture content from YouVersion and generate live AI synthesis via Gloo, you must set up the backend with your own credentials (see below).
-
-## Full Setup (Live Backend — Requires Your Own Credentials)
+## Setup (Requires Your Own Credentials)
 
 To connect to YouVersion and Gloo AI for real data, you must supply your own API credentials. The app does not ship with any keys — you need to obtain them yourself:
 
@@ -72,7 +58,6 @@ python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8099
 
 Verify: `curl http://127.0.0.1:8099/api/v1/health` should return `{"status":"ok","gloo_configured":true,"bible_provider":"youversion",...}`
 
-
 ### 2. Web App
 
 ```bash
@@ -87,8 +72,8 @@ The Vite dev server proxies `/api` requests to the backend at `http://127.0.0.1:
 
 ## How It Works
 
-1. **Read + Engage** — A verse arrives (from YouVersion when live, or local corpus when in mock mode). The user highlights a phrase and completes a daily prompt (emotion tap, short reflection, or one word).
-2. **Group Pulse** — Once engaged, the circle's responses are revealed with an AI synthesis of shared needs and ways to support each other (powered by Gloo AI in live mode, deterministic fallback in mock mode).
+1. **Read + Engage** — A verse arrives from YouVersion. The user highlights a phrase and completes a daily prompt (emotion tap, short reflection, or one word).
+2. **Group Pulse** — Once engaged, the circle's responses are revealed with an AI synthesis of shared needs and ways to support each other (powered by Gloo AI).
 3. **Tomorrow** — An adaptive passage recommendation based on the group's engagement signals, with transparent workflow/signals/safeguards.
 
 ## Key Configuration

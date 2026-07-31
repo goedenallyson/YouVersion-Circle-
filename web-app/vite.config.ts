@@ -2,7 +2,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Vite config for the Lumen production web app.
+// Vite config for the YouVersion Circle web app.
 // - dev server proxies /api to the local FastAPI backend so the browser only
 //   ever talks to our own origin (no API keys in the frontend).
 export default defineConfig({

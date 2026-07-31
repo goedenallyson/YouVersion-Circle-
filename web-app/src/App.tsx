@@ -4,7 +4,7 @@ import { createLiveApi, backendHealthy } from "./api/live";
 import type {
   Config,
   GroupPulse,
-  LumenApi,
+  CircleApi,
   Member,
   TomorrowRecommendation,
   VerseOfDay,
@@ -17,7 +17,7 @@ const GROUP = "demo";
 const API_BASE = (import.meta.env.VITE_API_BASE as string) || "/api/v1";
 
 export function App() {
-  const [api, setApi] = useState<LumenApi>(() => createMockApi());
+  const [api, setApi] = useState<CircleApi>(() => createMockApi());
   const [step, setStep] = useState(0);
   const [date, setDate] = useState(todayIso());
   const memberId = "maya";
@@ -49,7 +49,7 @@ export function App() {
   );
 
   const bootstrap = useCallback(
-    async (a: LumenApi) => {
+    async (a: CircleApi) => {
       try {
         const [cfg, mem] = await Promise.all([a.config(GROUP), a.members(GROUP)]);
         setConfig(cfg);
@@ -62,7 +62,7 @@ export function App() {
   );
 
   const loadVerse = useCallback(
-    async (a: LumenApi, d: string) => {
+    async (a: CircleApi, d: string) => {
       try {
         setVerse(await a.verseOfDay(GROUP, d));
         setError(null);
@@ -75,7 +75,7 @@ export function App() {
 
   useEffect(() => {
     (async () => {
-      let chosen: LumenApi;
+      let chosen: CircleApi;
       if (await backendHealthy(API_BASE)) {
         chosen = createLiveApi(API_BASE);
       } else {

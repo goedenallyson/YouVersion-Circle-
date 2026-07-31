@@ -1,4 +1,4 @@
-"""Lumen — the Verse-of-the-Day learning loop.
+"""YouVersion Circle — the Verse-of-the-Day learning loop.
 
 This is the product loop from the mockup:
 
@@ -525,7 +525,7 @@ class LumenEngine:
             classification=classification,
             confidence=confidence,
             response_count=response_count,
-            model="lumen-fallback",
+            model="circle-fallback",
             provider="fallback",
         )
 
@@ -732,7 +732,7 @@ class LumenEngine:
                 return text, llm.name
             except Exception:
                 pass
-        return self._fallback_explanation(theme, pulse, level), "lumen-fallback"
+        return self._fallback_explanation(theme, pulse, level), "circle-fallback"
 
     @staticmethod
     def _fallback_explanation(theme: str, pulse: GroupPulse, level: str) -> str:
