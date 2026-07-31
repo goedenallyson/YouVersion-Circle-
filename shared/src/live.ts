@@ -22,22 +22,22 @@ export function createLiveApi(base: string): CircleApi {
     `group_id=${encodeURIComponent(g)}${d ? `&date=${encodeURIComponent(d)}` : ""}`;
   return {
     mode: "live",
-    config: (g) => fetch(`${b}/lumen/config?${q(g)}`).then(json<Config>),
+    config: (g) => fetch(`${b}/circle/config?${q(g)}`).then(json<Config>),
     members: (g) =>
-      fetch(`${b}/lumen/members?${q(g)}`).then(
+      fetch(`${b}/circle/members?${q(g)}`).then(
         json<{ group_id: string; members: Member[] }>,
       ),
     verseOfDay: (g, d) =>
-      fetch(`${b}/lumen/verse-of-day?${q(g, d)}`).then(json<VerseOfDay>),
+      fetch(`${b}/circle/verse-of-day?${q(g, d)}`).then(json<VerseOfDay>),
     signal: (sig: EngagementSignal) =>
-      fetch(`${b}/lumen/signal`, {
+      fetch(`${b}/circle/signal`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(sig),
       }).then(json<SignalResponse>),
-    pulse: (g, d) => fetch(`${b}/lumen/pulse?${q(g, d)}`).then(json<GroupPulse>),
+    pulse: (g, d) => fetch(`${b}/circle/pulse?${q(g, d)}`).then(json<GroupPulse>),
     tomorrow: (g, d) =>
-      fetch(`${b}/lumen/tomorrow?${q(g, d)}`).then(json<TomorrowRecommendation>),
+      fetch(`${b}/circle/tomorrow?${q(g, d)}`).then(json<TomorrowRecommendation>),
   };
 }
 

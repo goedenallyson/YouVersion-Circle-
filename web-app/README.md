@@ -28,7 +28,7 @@ web-app/
 │  └─ components/
 │     ├─ PassageHighlighter.tsx    # tap + drag highlight, keyboard/ARIA
 │     ├─ PassageHighlighter.test.tsx
-│     ├─ EmojiSelector.tsx         # curated approved emoji from /api/v1/lumen/config
+│     ├─ EmojiSelector.tsx         # curated approved emoji from /api/v1/circle/config
 │     ├─ GroupPulseView.tsx        # named (non-anonymous) pulse + synthesis
 │     └─ RecommendationPlanView.tsx# Demo-mode signal weighting + safeguards
 └─ .env.example                    # frontend env (no secrets)

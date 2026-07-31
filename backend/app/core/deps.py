@@ -10,7 +10,7 @@ from app.providers.embeddings import LocalEmbeddingProvider
 from app.providers.gloo import GlooLLMProvider
 from app.providers.youversion import YouVersionBibleProvider
 from app.rag.engine import RagEngine
-from app.rag.lumen import LumenEngine
+from app.rag.circle import CircleEngine
 from app.rag.vector_store import VectorStore
 
 
@@ -48,5 +48,5 @@ def get_engine() -> RagEngine:
 
 
 @lru_cache
-def get_lumen_engine() -> LumenEngine:
-    return LumenEngine(get_engine())
+def get_circle_engine() -> CircleEngine:
+    return CircleEngine(get_engine())

@@ -218,7 +218,7 @@ _DEMO_PEER_WORDS = ["peace", "trust", "hope", "still", "grace"]
 _ENGAGEMENT_PAIRS = ["emotion", "reflection", "word"]
 
 
-class LumenEngine:
+class CircleEngine:
     def __init__(
         self, engine: RagEngine, store: GroupStore | None = None
     ) -> None:

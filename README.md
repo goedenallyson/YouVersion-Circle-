@@ -92,13 +92,13 @@ The Vite dev server proxies `/api` requests to the backend at `http://127.0.0.1:
 | Method | Path | Description |
 |--------|------|-------------|
 | GET | `/api/v1/health` | Backend health check |
-| GET | `/api/v1/lumen/verse-of-day` | Today's verse for the group |
-| POST | `/api/v1/lumen/signal` | Submit engagement (highlight, reaction, word, reflection) |
-| GET | `/api/v1/lumen/pulse` | Group pulse (locked until user engages) |
-| GET | `/api/v1/lumen/tomorrow` | Adaptive recommendation for tomorrow |
-| GET | `/api/v1/lumen/config` | Group config (name, approved emoji) |
-| GET | `/api/v1/lumen/members` | Demo member list |
-| POST | `/api/v1/lumen/synthesize` | Standalone Gloo AI synthesis |
+| GET | `/api/v1/circle/verse-of-day` | Today's verse for the group |
+| POST | `/api/v1/circle/signal` | Submit engagement (highlight, reaction, word, reflection) |
+| GET | `/api/v1/circle/pulse` | Group pulse (locked until user engages) |
+| GET | `/api/v1/circle/tomorrow` | Adaptive recommendation for tomorrow |
+| GET | `/api/v1/circle/config` | Group config (name, approved emoji) |
+| GET | `/api/v1/circle/members` | Demo member list |
+| POST | `/api/v1/circle/synthesize` | Standalone Gloo AI synthesis |
 
 ## Development
 
